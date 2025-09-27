@@ -65,9 +65,9 @@
     "photos": [
       {
         "urls": ["images/GAP/1.jpg",
-                 "images/GAP/2.png",
+                 "images/GAP/2.PNG",
                  "images/GAP/3.jpg",
-                 "images/GAP/4.png",
+                 "images/GAP/4.PNG",
                  "images/GAP/5.jpg",
                  "images/GAP/6.jpg",
                  "images/GAP/7.jpg",
@@ -240,4 +240,3 @@
     ]
   }
 ]
-
