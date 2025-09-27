@@ -36,16 +36,16 @@
     "google_map_url": "https://maps.app.goo.gl/HHprpm3DPfkSfDPn8",
     "photos": [
       {
-        "urls": ["images/The Loyal Pin Wa Wa House/1.png",
-                 "images/The Loyal Pin Wa Wa House/2.png",
-                 "images/The Loyal Pin Wa Wa House/3.png",
-                 "images/The Loyal Pin Wa Wa House/4.png",
-                 "images/The Loyal Pin Wa Wa House/5.png",
-                 "images/The Loyal Pin Wa Wa House/6.png",
-                 "images/The Loyal Pin Wa Wa House/7.png",
-                 "images/The Loyal Pin Wa Wa House/8.png",
-                 "images/The Loyal Pin Wa Wa House/9.png",
-                 "images/The Loyal Pin Wa Wa House/10.png",
+        "urls": ["images/The Loyal Pin Wa Wa House/1.PNG",
+                 "images/The Loyal Pin Wa Wa House/2.PNG",
+                 "images/The Loyal Pin Wa Wa House/3.PNG",
+                 "images/The Loyal Pin Wa Wa House/4.PNG",
+                 "images/The Loyal Pin Wa Wa House/5.PNG",
+                 "images/The Loyal Pin Wa Wa House/6.PNG",
+                 "images/The Loyal Pin Wa Wa House/7.PNG",
+                 "images/The Loyal Pin Wa Wa House/8.PNG",
+                 "images/The Loyal Pin Wa Wa House/9.PNG",
+                 "images/The Loyal Pin Wa Wa House/10.PNG",
                  "images/The Loyal Pin Wa Wa House/11.jpg"
                 ],
         "timestamp": "2024",
@@ -136,11 +136,11 @@
     "google_map_url": "https://maps.app.goo.gl/7T1i16jodwRaJ5XFA",
     "photos": [
       {
-        "urls": ["images/COK/1.png",
-                 "images/COK/2.png",
-                 "images/COK/3.png",
-                 "images/COK/4.png",
-                 "images/COK/5.png"
+        "urls": ["images/COK/1.PNG",
+                 "images/COK/2.PNG",
+                 "images/COK/3.PNG",
+                 "images/COK/4.PNG",
+                 "images/COK/5.PNG"
                 ],
         "videos": ["images/COK/6.mp4"],
         "timestamp": "2021/9/11",
@@ -178,10 +178,10 @@
     "google_map_url": "https://maps.app.goo.gl/bjx12PoV6xewN4ab6",
     "photos": [
       {
-        "urls": ["images/FigureGround Cafe/1.png",
-                 "images/FigureGround Cafe/2.png",
+        "urls": ["images/FigureGround Cafe/1.PNG",
+                 "images/FigureGround Cafe/2.PNG",
                  "images/FigureGround Cafe/3.jpg",
-                 "images/FigureGround Cafe/4.png",
+                 "images/FigureGround Cafe/4.PNG",
                  "images/FigureGround Cafe/5.jpg",
                  "images/FigureGround Cafe/6.jpg",
                  "images/FigureGround Cafe/7.jpg"
@@ -240,3 +240,4 @@
     ]
   }
 ]
+
