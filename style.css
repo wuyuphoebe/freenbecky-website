@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Noto+Sans+TC:wght@300;500&display=swap');
+
+:root {
+    --cream: #FFFDD0;      /* 奶油白背景 */
+    --gold: #D4AF37;       /* 質感金 */
+    --gold-soft: #EAD694;  /* 淺金 */
+    --white: #FFFFFF;      /* 純白 */
+    --text: #4A443A;       /* 深褐文字 */
+}
+
+* { box-sizing: border-box; }
+
+body {
+    background-color: var(--cream);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* 導覽列：置中佈局 */
+nav {
+    background: var(--white);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    position: sticky;
+    top: 0; 
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 1.8rem; 
+    color: var(--gold); 
+    text-decoration: none; 
+    letter-spacing: 4px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav a { 
+    text-decoration: none; 
+    color: var(--gold); 
+    margin: 0 20px; 
+    font-weight: 500; 
+    font-size: 0.85rem; 
+    letter-spacing: 2px; 
+    transition: 0.3s ease;
+}
+
+nav a:hover {
+    opacity: 0.5;
+    transform: translateY(-1px);
+}
+
+/* 共用元件 */
+.serif { font-family: 'Playfair Display', serif; }
+.gold-text { color: var(--gold); }
+.fade-in { animation: fadeIn 1.2s ease-out forwards; }
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(15px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* 地圖外框容器 */
+.map-wrapper {
+    max-width: 1100px; 
+    margin: 30px auto 10px auto; 
+    padding: 12px;    
+    background: var(--white); 
+    border: 1px solid var(--gold); 
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.1);
+}
+
+#map { 
+    height: 60vh; 
+    width: 100%; 
+    border-radius: 12px; 
+    z-index: 1;
+}
+
+/* 回憶錄卡片與網格 */
+.grid-layout { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 35px; 
+    padding: 40px 20px; 
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.card { 
+    background: var(--white); 
+    padding: 15px; 
+    border-radius: 15px; 
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.03); 
+    transition: all 0.4s ease;
+}
+
+.card:hover { 
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.1);
+}
+
+.card img { 
+    width: 100%; 
+    border-radius: 10px; 
+    height: 220px; 
+    object-fit: cover; 
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilgrimage Map | FreenBecky</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        .map-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 18px;
+            background-color: var(--gold);
+            color: white !important;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        .map-btn:hover {
+            background-color: #333;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">FB ARCHIVE</a>
+            <div class="links">
+                <a href="index.html">HOME</a>
+                <a href="map.html">MAP</a>
+                <a href="archive.html">ARCHIVE</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="fade-in" style="padding: 0 20px;">
+        <h2 class="serif gold-text" style="text-align: center; margin-top: 50px; font-size: 2.2rem; letter-spacing: 3px;">
+            The Pilgrimage Map
+        </h2>
+        
+        <div class="map-wrapper">
+            <div id="map"></div>
+        </div>
+        
+        <div style="text-align: center; margin-bottom: 50px;">
+            <p style="opacity: 0.5; font-size: 0.85rem; letter-spacing: 2px;">
+                — EXPLORE THE SACRED PLACES —
+            </p>
+            <div style="width: 30px; height: 1px; background: var(--gold); margin: 15px auto;"></div>
+        </div>
+    </main>
+
+    <script src="data.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([13.7563, 100.5018], 11);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        if (typeof FB_DATA !== 'undefined') {
+            FB_DATA.forEach(item => {
+                if (item.lat && item.lng) {
+                    const marker = L.marker([item.lat, item.lng]).addTo(map);
+                    
+                    // 優先使用自定義網址，若無則產生座標搜尋網址
+                    const finalUrl = item.mapUrl ? item.mapUrl : `https://www.google.com/maps/search/?api=1&query=${item.lat},${item.lng}`;
+                    
+                    const popupContent = `
+                        <div style="text-align:center; min-width:160px; font-family: sans-serif; padding: 5px;">
+                            <strong style="color:var(--gold); font-size: 15px; display:block; margin-bottom:5px;">${item.name}</strong>
+                            <img src="${item.img}" style="width:100%; border-radius:8px; margin-bottom:8px; object-fit: cover; height:90px; border: 1px solid #eee;">
+                            <div style="font-size: 11px; color: #666; line-height:1.4;">
+                                <span>${item.celebrity}</span><br>
+                                <span style="color: #999;">${item.date}</span>
+                            </div>
+                            <a href="${finalUrl}" target="_blank" class="map-btn">開啟 GOOGLE MAPS</a>
+                        </div>
+                    `;
+                    marker.bindPopup(popupContent);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

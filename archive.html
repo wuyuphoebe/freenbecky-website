@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Archive | FreenBecky</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 高級搜尋區樣式 */
+        .search-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid var(--gold);
+            border-radius: 25px;
+            padding: 5px 20px;
+            transition: 0.3s;
+        }
+
+        .filter-group:focus-within {
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .filter-group input, .filter-group select {
+            border: none;
+            outline: none;
+            padding: 10px;
+            background: transparent;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        /* 金色箭頭客製化 */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23D4AF37' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            padding-right: 30px !important;
+            cursor: pointer;
+        }
+
+        /* 照片流動畫 */
+        .grid-layout {
+            transition: all 0.5s ease;
+        }
+
+        .card {
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .card.hidden {
+            display: none;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .no-results {
+            text-align: center;
+            color: var(--gold);
+            grid-column: 1 / -1;
+            padding: 50px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">FB ARCHIVE</a>
+            <div class="links">
+                <a href="index.html">HOME</a>
+                <a href="map.html">MAP</a>
+                <a href="archive.html">ARCHIVE</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="fade-in">
+        <h2 class="serif gold-text" style="text-align: center; font-size: 2.5rem; margin-top: 50px;">The Archive</h2>
+        
+        <!-- 高級搜尋系統 -->
+        <div class="search-container">
+            <!-- 關鍵字搜尋 -->
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="搜尋地點、關鍵字或人物...">
+            </div>
+
+            <!-- 年份篩選 -->
+            <div class="filter-group">
+                <select id="yearFilter">
+                    <option value="all">所有年份</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                </select>
+            </div>
+
+            <!-- 人物篩選 -->
+            <div class="filter-group">
+                <select id="celebFilter">
+                    <option value="all">所有人物</option>
+                    <option value="Freen">Freen</option>
+                    <option value="Becky">Becky</option>
+                    <option value="Freen & Becky">Freen & Becky</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="gallery" class="grid-layout">
+            <!-- 卡片由 JS 生成 -->
+        </div>
+        <div id="noResults" class="no-results serif">No memories found.</div>
+    </section>
+
+    <script src="data.js"></script>
+    <script>
+        const gallery = document.getElementById('gallery');
+        const searchInput = document.getElementById('searchInput');
+        const yearFilter = document.getElementById('yearFilter');
+        const celebFilter = document.getElementById('celebFilter');
+        const noResults = document.getElementById('noResults');
+
+        // 初始化渲染
+        function renderGallery(data) {
+            gallery.innerHTML = '';
+            if (data.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            noResults.style.display = 'none';
+
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card fade-in';
+                card.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}">
+                    <h3 class="gold-text" style="margin: 15px 0 5px 0; font-size: 1.2rem;">${item.name}</h3>
+                    <p style="font-size: 0.75rem; opacity: 0.5; margin-bottom: 10px; letter-spacing: 1px;">${item.date} | ${item.celebrity}</p>
+                    <p style="font-size: 0.9rem; line-height: 1.6; color: #666;">${item.desc}</p>
+                `;
+                gallery.appendChild(card);
+            });
+        }
+
+        // 智能過濾邏輯
+        function filterData() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedYear = yearFilter.value;
+            const selectedCeleb = celebFilter.value;
+
+            const filtered = FB_DATA.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                     item.desc.toLowerCase().includes(searchTerm) ||
+                                     item.celebrity.toLowerCase().includes(searchTerm);
+                
+                const matchesYear = selectedYear === 'all' || item.date.includes(selectedYear);
+                const matchesCeleb = selectedCeleb === 'all' || item.celebrity === selectedCeleb;
+
+                return matchesSearch && matchesYear && matchesCeleb;
+            });
+
+            renderGallery(filtered);
+        }
+
+        // 監聽輸入與切換
+        searchInput.addEventListener('input', filterData);
+        yearFilter.addEventListener('change', filterData);
+        celebFilter.addEventListener('change', filterData);
+
+        // 首次載入
+        renderGallery(FB_DATA);
+    </script>
+</body>
+</html>
